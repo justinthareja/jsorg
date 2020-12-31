@@ -2,21 +2,24 @@ let Header = (function () {
        
     function init() {
         let $headerLinks = document.querySelectorAll("[rel=js-header] > [rel=js-controls] > a");
-        let $modal = document.querySelector("#modal");
         
-        function openModal(e) {
+        function toggleModal(e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             
+            // TODO: Stop extra ajax call when closing modal
+            // TODO: Only toggle the modal if the login modal is open and you click login again,
+            // currently this will close if the register modal is open and you click login
             Ajax.get(e.target.href, function(err, response) {
-                $modal.innerHTML = response;
-                $modal.style.display = "block";
+                Modal.setContent(response);
+                Modal.toggle();
             });
+            
         }
 
         $headerLinks.forEach(function($el) {
-            $el.addEventListener("click", openModal);
+            $el.addEventListener("click", toggleModal);
         });
     }
 
