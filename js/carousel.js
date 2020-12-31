@@ -26,17 +26,19 @@ $(document).ready(function(){
 
 	var $content = $("[rel=js-carousel] > [rel=js-content]");
 	var $items = $content.children("[rel=js-items]");
-	var $left = $("[rel=js-carousel] > [rel=js-controls] > [rel=js-left]");
-	var $right = $("[rel=js-carousel] > [rel=js-controls] > [rel=js-right]");
-
-
+	let $left = document.querySelector("#carousel > .controls > .left");
+	let $right = document.querySelector("#carousel > .controls > .right");
+	
 	var contentWidth = $content.width();
 	var itemsWidth = $items.width();
 	var position = 0;
 	var maxPosition = (itemsWidth - contentWidth);
 
+	$left.addEventListener('click', scrollLeft);
+	$right.addEventListener('click', scrollRight);
 	// attach click handlers for the `$left` and `$right` buttons,
 	// that call the `scrollLeft(..)` and `scrollRight(..)` functions,
 	// respectively
+	
 
 });
