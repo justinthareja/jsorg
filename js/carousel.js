@@ -22,12 +22,22 @@ let Carousel = (function() {
 
 		$items.css({ left: (-position) + "px" });
 	}
+	
+	function showDetails(e) {
+		let rel = e.target.attributes.rel.value;
+		let itemId = (rel.match(/[0-9]/g) || [])[0];
 
+		if (itemId) {
+			Details.loadPerson(itemId);
+		}
+	}
+	
 	function init() {
 		$left.addEventListener('click', scrollLeft);
 		$right.addEventListener('click', scrollRight);
+		$content.on('click', showDetails);
 	}
-	
+
 	var $content = $("[rel=js-carousel] > [rel=js-content]");
 	var $items = $content.children("[rel=js-items]");
 	let $left = document.querySelector("#carousel > .controls > .left");
