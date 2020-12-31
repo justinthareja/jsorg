@@ -1,25 +1,30 @@
-(function() {
-    // The DOM will be available here
-    // https://stackoverflow.com/questions/9899372/pure-javascript-equivalent-of-jquerys-ready-how-to-call-a-function-when-t
-    function handleHeaderLinkClick(e) {
-        e.preventDefault();
+let Header = (function () {
+       
+    function init() {
+        let $headerLinks = document.querySelectorAll("[rel=js-header] > [rel=js-controls] > a");
+        let $modal = document.querySelector("#modal");
         
-        Ajax.get(this.href, function (err, response) {
-            if (err) {
-                // TODO: Learn how to properly handle errors
-                return false;
-            }
+        function openModal(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
             
-            let $modal = document.querySelector("#modal");
-            
-            $modal.innerHTML = response;
-            $modal.style.display = "block";
+            Ajax.get(e.target.href, function(err, response) {
+                $modal.innerHTML = response;
+                $modal.style.display = "block";
+            });
+        }
+
+        $headerLinks.forEach(function($el) {
+            $el.addEventListener("click", openModal);
         });
     }
-    
-    let $headerLinks = document.querySelectorAll("header a");
 
-    $headerLinks.forEach(function($el) {
-        $el.onclick = handleHeaderLinkClick;
-    });
+    return {
+        init: init,
+    }
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+    Header.init();
+});
