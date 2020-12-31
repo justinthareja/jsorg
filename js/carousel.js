@@ -52,7 +52,3 @@ let Carousel = (function() {
 		init: init
 	}
 })();
-
-$(document).ready(function(){
-	Carousel.init();		
-});

@@ -24,7 +24,3 @@ let Header = (function () {
         init: init,
     }
 })();
-
-document.addEventListener("DOMContentLoaded", function() {
-    Header.init();
-});

@@ -16,7 +16,3 @@ let Details = (function() {
 		loadPerson
 	};
 })();
-
-$(document).ready(function(){
-	Details.init();
-});
