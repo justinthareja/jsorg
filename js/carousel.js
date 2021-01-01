@@ -1,4 +1,6 @@
 let Carousel = (function() {
+	let $content, $items, $left, $right;
+	let contentWidth, itemsWidth, position, maxPosition;
 	
 	function scrollLeft(evt) {
 		evt.preventDefault();
@@ -24,31 +26,36 @@ let Carousel = (function() {
 		$items.css({ left: (-position) + "px" });
 	}
 	
-	function emitPersonSelected(e) {
-		let rel = e.target.attributes.rel.value;
-		let itemId = (rel.match(/[0-9]/g) || [])[0];
-
-		if (itemId) {
-			EVT.emit("person-selected", itemId);
+	function handlePersonClicked(e) {
+		// Click handler is delegated to parent container,
+		// so make sure the user clicked on a person before handling
+		if (!e.target.matches("[rel^=js-item-]")) {
+			return;
 		}
+		
+		let rel = e.target.getAttribute("rel");
+		let id = (rel.match(/[0-9]/g) || [])[0];
+
+		EVT.emit("person-selected", id);
 	}
 	
 	function init() {
+		$content = $("[rel=js-carousel] > [rel=js-content]");
+		$items = $content.children("[rel=js-items]");
+		$left = document.querySelector("#carousel > .controls > .left");
+		$right = document.querySelector("#carousel > .controls > .right");
+	
+		contentWidth = $content.width();
+		itemsWidth = $items.width();
+		position = 0;
+		maxPosition = (itemsWidth - contentWidth);
+		
 		$left.addEventListener('click', scrollLeft);
 		$right.addEventListener('click', scrollRight);
-		$content.on('click', emitPersonSelected);
+		$content.on('click', handlePersonClicked);
+
 	}
-
-	var $content = $("[rel=js-carousel] > [rel=js-content]");
-	var $items = $content.children("[rel=js-items]");
-	let $left = document.querySelector("#carousel > .controls > .left");
-	let $right = document.querySelector("#carousel > .controls > .right");
-
-	var contentWidth = $content.width();
-	var itemsWidth = $items.width();
-	var position = 0;
-	var maxPosition = (itemsWidth - contentWidth);
-
+	
 	EVT.on("init", init);
 	
 	return {

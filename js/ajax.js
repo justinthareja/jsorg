@@ -1,5 +1,4 @@
-function Ajax() {
-
+let Ajax = (function () {
     function get(url, callback) {
         httpRequest = new XMLHttpRequest();
 
@@ -35,6 +34,4 @@ function Ajax() {
         get: get
     };
 
-}
-
-window.Ajax = Ajax();
+})();

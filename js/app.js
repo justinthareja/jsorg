@@ -1,5 +1,5 @@
 let EVT = new EventEmitter2();
 
-$(document).ready(function () {
+window.addEventListener("DOMContentLoaded", function(event) {
     EVT.emit("init");
 });

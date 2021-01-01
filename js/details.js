@@ -1,7 +1,11 @@
 let Details = (function() {
-	let $details = document.querySelector("[rel=js-details]");
-	
+	let $details;
+	let $randomButton;
+
 	function init() {
+		$details = document.querySelector("[rel=js-details]");
+
+		EVT.on("person-selected", loadPerson);
 	}
 	
 	function loadPerson(id) {
@@ -9,7 +13,7 @@ let Details = (function() {
 			$details.innerHTML = response;
 			
 			if (id == 1) {
-				let $randomButton = document.querySelector("[rel=js-random]");
+				$randomButton = document.querySelector("[rel=js-random]");
 				$randomButton.addEventListener('click', function(e) {
 					let ids = [0, 1, 3, 4, 5];
 					let i = getRandomInt(0, ids.length);
@@ -25,9 +29,8 @@ let Details = (function() {
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min) + min);
 	}
-
+	
 	EVT.on("init", init);
-	EVT.on("person-selected", loadPerson);
 
 	return {
 		init,
