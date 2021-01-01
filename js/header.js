@@ -1,5 +1,5 @@
 let Header = (function () {
-       
+
     function init() {
         let $headerLinks = document.querySelectorAll("[rel=js-header] > [rel=js-controls] > a");
         
@@ -23,6 +23,8 @@ let Header = (function () {
         });
     }
 
+    EVT.on("init", init);
+    
     return {
         init: init,
     }

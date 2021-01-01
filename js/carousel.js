@@ -1,4 +1,5 @@
 let Carousel = (function() {
+	
 	function scrollLeft(evt) {
 		evt.preventDefault();
 		evt.stopPropagation();
@@ -48,6 +49,8 @@ let Carousel = (function() {
 	var position = 0;
 	var maxPosition = (itemsWidth - contentWidth);
 
+	EVT.on("init", init);
+	
 	return {
 		init: init
 	}

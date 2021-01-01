@@ -25,6 +25,8 @@ let Modal = (function() {
         return $modal.style.display === "block";
     }
 
+    EVT.on("init", init);
+    
     return {
         init,
         toggle,

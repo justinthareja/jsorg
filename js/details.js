@@ -11,6 +11,8 @@ let Details = (function() {
 		});
 	}
 
+	EVT.on("init", init);
+	
 	return {
 		init,
 		loadPerson
