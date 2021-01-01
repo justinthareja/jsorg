@@ -123,6 +123,14 @@ header > .controls > a {
 	background-color: #c3e3f7;
 	overflow-y: scroll;
 }
+#details h1 {
+	margin-bottom: 10px;
+}
+
+#details button {
+	display: block;
+	margin-bottom: 10px;
+}
 
 #details > .content > h1:first-child {
 	margin-top: 0px;
