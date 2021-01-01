@@ -12,9 +12,9 @@ let Details = (function() {
 	}
 
 	EVT.on("init", init);
-	
+	EVT.on("person-selected", loadPerson);
+
 	return {
 		init,
-		loadPerson
 	};
 })();

@@ -24,19 +24,19 @@ let Carousel = (function() {
 		$items.css({ left: (-position) + "px" });
 	}
 	
-	function showDetails(e) {
+	function emitPersonSelected(e) {
 		let rel = e.target.attributes.rel.value;
 		let itemId = (rel.match(/[0-9]/g) || [])[0];
 
 		if (itemId) {
-			Details.loadPerson(itemId);
+			EVT.emit("person-selected", itemId);
 		}
 	}
 	
 	function init() {
 		$left.addEventListener('click', scrollLeft);
 		$right.addEventListener('click', scrollRight);
-		$content.on('click', showDetails);
+		$content.on('click', emitPersonSelected);
 	}
 
 	var $content = $("[rel=js-carousel] > [rel=js-content]");
